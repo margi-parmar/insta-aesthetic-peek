@@ -6,24 +6,49 @@ import { Button } from "@/components/ui/button";
 interface Post {
   is_video: boolean;
   url: string;
+  cover_photo?: string;
 }
 
 const PostGrid = () => {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Dummy data for showcase
+  // Fetch posts from API
   useEffect(() => {
-    const dummyPosts: Post[] = [
-      { is_video: false, url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop" },
-      { is_video: true, url: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" },
-      { is_video: false, url: "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=400&fit=crop" },
-      { is_video: true, url: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4" },
-      { is_video: false, url: "https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=400&h=400&fit=crop" },
-      { is_video: false, url: "https://images.unsplash.com/photo-1494790108755-2616c9f4d93e?w=400&h=400&fit=crop" },
-    ];
-    setPosts(dummyPosts);
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await fetch('https://instacapture.stuffs.me/api/posts/@prathmeshsoni');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        setPosts(data.posts || []);
+      } catch (err) {
+        console.error('Error fetching posts:', err);
+        setError('Failed to load posts');
+        // Fallback to dummy data on error
+        const dummyPosts: Post[] = [
+          { is_video: false, url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop" },
+          { is_video: true, url: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4", cover_photo: "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=400&fit=crop" },
+          { is_video: false, url: "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=400&fit=crop" },
+          { is_video: true, url: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4", cover_photo: "https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=400&h=400&fit=crop" },
+          { is_video: false, url: "https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=400&h=400&fit=crop" },
+          { is_video: false, url: "https://images.unsplash.com/photo-1494790108755-2616c9f4d93e?w=400&h=400&fit=crop" },
+        ];
+        setPosts(dummyPosts);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
   }, []);
 
   useEffect(() => {
@@ -67,6 +92,25 @@ const PostGrid = () => {
     </DialogContent>
   );
 
+  if (loading) {
+    return (
+      <div className="grid grid-cols-3 gap-1 md:gap-2 p-4">
+        {Array.from({ length: 9 }).map((_, index) => (
+          <div key={index} className="aspect-square bg-muted animate-pulse rounded-sm" />
+        ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-4 text-center text-muted-foreground">
+        <p>{error}</p>
+        <p className="text-sm mt-2">Showing fallback content</p>
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-3 gap-1 md:gap-2 p-4">
       {posts.map((post, index) => (
@@ -77,7 +121,7 @@ const PostGrid = () => {
               onClick={() => setSelectedPost(post)}
             >
               <img 
-                src={post.url} 
+                src={post.is_video && post.cover_photo ? post.cover_photo : post.url} 
                 alt="Post" 
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
