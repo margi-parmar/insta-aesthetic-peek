@@ -5,53 +5,86 @@ const profileAvatar = 'https://krishna.stuffs.me/instacapture/assets/images/home
 
 const ProfileHeader = () => {
   return (
-    <div className="bg-black text-white min-h-screen p-6">
-      <div className="max-w-md mx-auto">
-        {/* Header Section */}
-        <div className="flex items-center justify-between mb-6">
+    <div className="flex flex-col space-y-6 p-4 md:p-6">
+      {/* Mobile Layout */}
+      <div className="flex items-center space-x-4 md:hidden">
+        <Avatar className="w-20 h-20">
+          <AvatarImage src={profileAvatar} alt="Profile" className="rounded-full" />
+          <AvatarFallback>PDSO</AvatarFallback>
+        </Avatar>
+        
+        <div className="flex-1">
+          <div className="flex items-center space-x-2 mb-2">
+            <h1 className="text-xl font-semibold">PrathmeshSoni25</h1>
+            <svg
+              aria-label="Verified"
+              className="x1lliihq x1n2onr6"
+              fill="rgb(0, 149, 246)"
+              height="18"
+              role="img"
+              viewBox="0 0 40 40"
+              width="18"
+            >
+              <title>Verified</title>
+              <path
+                d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z"
+                fillRule="evenodd"
+              />
+            </svg>
+          </div>
+          <div className="flex space-x-4 text-sm">
+            <span><strong>505</strong> followers</span>
+            <span><strong>1051</strong> following</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden md:flex items-center space-x-8">
+        <Avatar className="w-32 h-32">
+          <AvatarImage src={profileAvatar} alt="Profile" className="rounded-full" />
+          <AvatarFallback>PDSO</AvatarFallback>
+        </Avatar>
+        
+        <div className="flex-1 space-y-4">
           <div className="flex items-center space-x-4">
-            <Avatar className="w-20 h-20">
-              <AvatarImage src={profileAvatar} alt="Profile" />
-              <AvatarFallback>PS</AvatarFallback>
-            </Avatar>
-            <div>
-              <h1 className="text-xl font-normal text-white">PrathmeshSoni25</h1>
-            </div>
+            <h1 className="text-2xl font-light">PrathmeshSoni25</h1>
+            <svg
+              aria-label="Verified"
+              className="x1lliihq x1n2onr6"
+              fill="rgb(0, 149, 246)"
+              height="18"
+              role="img"
+              viewBox="0 0 40 40"
+              width="18"
+            >
+              <title>Verified</title>
+              <path
+                d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z"
+                fillRule="evenodd"
+              />
+            </svg>
+            <Button variant="outline" size="sm">Follow</Button>
           </div>
-          <Button 
-            variant="secondary" 
-            size="sm" 
-            className="bg-gray-700 hover:bg-gray-600 text-white border-0 px-6"
-          >
-            Follow
-          </Button>
+          
+          <div className="flex space-x-8">
+            <span><strong>505</strong> followers</span>
+            <span><strong>1051</strong> following</span>
+          </div>
         </div>
+      </div>
+      
+      {/* Follow Button for Mobile */}
+      <div className="md:hidden mt-4">
+        <Button variant="outline" className="w-full">Follow</Button>
+      </div>
 
-        {/* Stats Section */}
-        <div className="flex space-x-6 mb-6">
-          <div className="text-center">
-            <div className="text-white font-semibold">478</div>
-            <div className="text-gray-300 text-sm">followers</div>
-          </div>
-          <div className="text-center">
-            <div className="text-white font-semibold">757</div>
-            <div className="text-gray-300 text-sm">following</div>
-          </div>
-        </div>
-
-        {/* Bio Section */}
-        <div className="space-y-1">
-          <h2 className="text-white font-normal">Prathmesh Soni ❤️🔥</h2>
-          <p className="text-orange-400 font-semibold">Libra</p>
-          <p className="text-white">人生の戦い</p>
-          <a 
-            href="https://soniprathmesh.com/" 
-            className="text-blue-400 hover:underline block" 
-            target="_blank"
-          >
-            soniprathmesh.com
-          </a>
-        </div>
+      {/* Bio Section */}
+      <div>
+        <h2 className="font-semibold">Prathmesh Soni ❤‍🔥 </h2>
+        <p className="text-muted-foreground">𝕃𝕚𝕓𝕣𝕒</p>
+        <p className="text-muted-foreground">人生の戦い</p>
+        <a href="https://soniprathmesh.com/" className="text-blue-500 hover:underline" target="_blank">soniprathmesh.com</a>
       </div>
     </div>
   );
