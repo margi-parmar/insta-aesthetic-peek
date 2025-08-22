@@ -1,15 +1,15 @@
 import ProfileHeader from "@/components/ProfileHeader";
 import ContentTabs from "@/components/ContentTabs";
-import Footer from "@/components/Footer";
+import BottomNav from "@/components/BottomNav";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-16 md:pb-0">
       <div className="max-w-4xl mx-auto">
         <ProfileHeader />
         <ContentTabs />
       </div>
-      <Footer />
+      <BottomNav />
     </div>
   );
 };

@@ -33,32 +33,34 @@ const PostGrid = () => {
   }, [selectedPost]);
 
   const PostModal = ({ post }: { post: Post }) => (
-    <DialogContent className="max-w-4xl p-0 bg-black border-0">
+    <DialogContent className="max-w-4xl p-0 bg-black border-0" onOpenAutoFocus={(e) => e.preventDefault()}>
       <div className="relative w-full h-[90vh] flex items-center justify-center">
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          className="absolute top-4 right-4 z-50 text-white hover:bg-white/20 bg-black/50 rounded-full w-10 h-10 p-0"
-          onClick={() => setSelectedPost(null)}
+        <button 
+          className="absolute top-4 right-4 z-50 text-white hover:bg-white/20 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center transition-colors"
+          onClick={(e) => {
+            e.stopPropagation();
+            setSelectedPost(null);
+          }}
         >
           <X className="w-6 h-6" />
-        </Button>
+        </button>
         
         {post.is_video ? (
           <video
             ref={videoRef}
             src={post.url}
-            className="max-h-full max-w-full object-contain"
-            controls
+            className="max-h-full max-w-full object-contain rounded-lg"
             autoPlay
             loop
             muted
+            playsInline
+            style={{ background: 'transparent' }}
           />
         ) : (
           <img 
             src={post.url} 
             alt="Post" 
-            className="max-h-full max-w-full object-contain"
+            className="max-h-full max-w-full object-contain rounded-lg"
           />
         )}
       </div>
@@ -68,9 +70,12 @@ const PostGrid = () => {
   return (
     <div className="grid grid-cols-3 gap-1 md:gap-2 p-4">
       {posts.map((post, index) => (
-        <Dialog key={index}>
+        <Dialog key={index} open={selectedPost === post} onOpenChange={(open) => !open && setSelectedPost(null)}>
           <DialogTrigger asChild>
-            <div className="relative aspect-square cursor-pointer group overflow-hidden rounded-sm">
+            <div 
+              className="relative aspect-square cursor-pointer group overflow-hidden rounded-sm"
+              onClick={() => setSelectedPost(post)}
+            >
               <img 
                 src={post.url} 
                 alt="Post" 
@@ -94,7 +99,7 @@ const PostGrid = () => {
               )}
             </div>
           </DialogTrigger>
-          <PostModal post={post} />
+          {selectedPost === post && <PostModal post={post} />}
         </Dialog>
       ))}
     </div>
