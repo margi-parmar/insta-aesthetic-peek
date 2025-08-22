@@ -1,4 +1,7 @@
-import { Home, Search, PlusSquare, Heart, User } from "lucide-react";
+import { Home, Search, Heart, User } from "lucide-react";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";\
+
 
 const profileAvatar = 'https://krishna.stuffs.me/instacapture/assets/images/home/Prathmesh-Soni.png';
 
