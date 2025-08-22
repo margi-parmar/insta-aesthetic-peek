@@ -22,7 +22,8 @@ const PostGrid = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch('https://instacapture.stuffs.me/api/posts/@prathmeshsoni');
+        let urls = "https://instacapture.stuffs.me/api/posts/@prathmeshsoni";
+        const response = await fetch(urls);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
