@@ -124,6 +124,10 @@ All colors MUST be HSL.
   html {
     @apply dark;
   }
+  
+  body {
+    @apply dark;
+  }
 }
 
 @layer utilities {

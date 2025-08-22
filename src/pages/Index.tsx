@@ -1,5 +1,6 @@
 import ProfileHeader from "@/components/ProfileHeader";
 import ContentTabs from "@/components/ContentTabs";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -8,6 +9,7 @@ const Index = () => {
         <ProfileHeader />
         <ContentTabs />
       </div>
+      <Footer />
     </div>
   );
 };
