@@ -47,11 +47,11 @@ const ProfileHeader = () => {
         </Avatar>
         
         <div className="flex-1 space-y-4">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center">
             <h1 className="text-2xl font-light">PrathmeshSoni25</h1>
             <svg
               aria-label="Verified"
-              className="x1lliihq x1n2onr6"
+              className="x1lliihq x1n2onr6 mx-1"
               fill="rgb(0, 149, 246)"
               height="18"
               role="img"
@@ -64,7 +64,7 @@ const ProfileHeader = () => {
                 fillRule="evenodd"
               />
             </svg>
-            <Button variant="outline" size="sm">Follow</Button>
+            <Button className="mx-2" variant="outline" size="sm">Follow</Button>
           </div>
           
           <div className="flex space-x-8">
