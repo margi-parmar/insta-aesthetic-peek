@@ -23,7 +23,7 @@ const PostGrid = () => {
         setLoading(true);
         setError(null);
 
-        let urls = "https://instacapture.stuffs.me/api/posts/@prathmeshsoni";
+        let urls = "https://cse-aiml.tech/api/posts/@prathmeshsoni";
         const response = await fetch(urls);
         
         if (!response.ok) {
