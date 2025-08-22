@@ -1,4 +1,4 @@
-import { Grid3X3 } from "lucide-react";
+import { Grid3X3, Bookmark } from "lucide-react";
 import PostGrid from "./PostGrid";
 
 const ContentTabs = () => {
@@ -7,6 +7,9 @@ const ContentTabs = () => {
       <div className="flex items-center justify-center py-4 border-t border-border">
         <Grid3X3 className="w-5 h-5" />
         <span className="ml-2 text-sm font-medium">POSTS</span>
+
+        <Bookmark className="w-5 h-5" />
+        <span className="hidden sm:ml-2 sm:inline">SAVED</span>
       </div>
       
       <div className="mt-0">
