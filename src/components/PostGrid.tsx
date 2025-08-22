@@ -22,6 +22,7 @@ const PostGrid = () => {
       try {
         setLoading(true);
         setError(null);
+
         let urls = "https://instacapture.stuffs.me/api/posts/@prathmeshsoni";
         const response = await fetch(urls);
         
