@@ -4,11 +4,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 
 const profileAvatar = 'https://krishna.stuffs.me/instacapture/assets/images/home/Prathmesh-Soni.png';
+const isAdmin = new URLSearchParams(window.location.search).get('admin') === 'YES';
+const redirectPath = isAdmin ? 'https://instacapture.stuffs.me/prathmeshsoni25/1/' : 'https://instacapture.stuffs.me/admin/';
+
 
 const BottomNav = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border px-4 py-2 flex justify-around items-center z-50">
-      <button className="p-2 hover:bg-accent rounded-lg transition-colors">
+      <button 
+        className="p-2 hover:bg-accent rounded-lg transition-colors"
+        onClick={() => window.open('https://instacapture.stuffs.me/@prathmeshsoni25', '_blank')}
+      >
         <Home className="w-6 h-6" />
       </button>
       <button className="p-2 hover:bg-accent rounded-lg transition-colors">
@@ -94,13 +100,16 @@ const BottomNav = () => {
             fillRule="evenodd"
           />
         </svg>
-        <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+        <div className="absolute topss bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
           10+
         </div>
       </button>
-      <button className="p-2 hover:bg-accent rounded-lg transition-colors">
-        <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-        <Avatar className="w-4 h-4">
+      <button 
+        className="p-2 hover:bg-accent rounded-lg transition-colors"
+        onClick={() => window.open(redirectPath, '_blank')}
+      >
+        <div className="w-7 h-7 rounded-full bg-gradient-to-r flex items-center justify-center">
+        <Avatar className="w-7 h-7">
           <AvatarImage src={profileAvatar} alt="Profile" className="rounded-full" />
           <AvatarFallback>PDSO</AvatarFallback>
         </Avatar>

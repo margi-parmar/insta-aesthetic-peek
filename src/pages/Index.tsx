@@ -4,7 +4,7 @@ import BottomNav from "@/components/BottomNav";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background pb-16 md:pb-0">
+    <div className="min-h-screen bg-background pb-16">
       <div className="max-w-4xl mx-auto">
         <ProfileHeader />
         <ContentTabs />
