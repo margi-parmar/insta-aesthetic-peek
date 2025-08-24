@@ -95,7 +95,7 @@ const ProfileHeader = () => {
         <h2 className="font-semibold">Prathmesh Soni ❤‍🔥 </h2>
         <p className="text-muted-foreground">𝕃𝕚𝕓𝕣𝕒</p>
         <p className="text-muted-foreground">人生の戦い</p>
-        <a href={`https://${PrimaryDomain}/`} className="text-blue-500 hover:underline" target="_blank">
+        <a href={`https://${PrimaryDomain}/`} className="text-blue-500 hover:underline dis-ruby-text" target="_blank">
           <svg
             aria-label="Link icon"
             role="img"
@@ -103,6 +103,7 @@ const ProfileHeader = () => {
             fill="currentColor"
             height="12"
             width="12"
+            className="mr-5px"
           >
             <title>Link icon</title>
             <path
