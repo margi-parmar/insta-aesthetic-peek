@@ -1,11 +1,13 @@
-import { Home, Search, Heart, User } from "lucide-react";
+import { Home, Search } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+import { SecDomain } from "@/components/ui/domains";
 
-const profileAvatar = 'https://krishna.stuffs.me/instacapture/assets/images/home/Prathmesh-Soni.png';
-const isAdmin = new URLSearchParams(window.location.search).get('admin') === 'YES';
-const redirectPath = isAdmin ? 'https://instacapture.stuffs.me/prathmeshsoni25/1/' : 'https://instacapture.stuffs.me/admin/';
+
+const profileAvatar = `https://krishna.${SecDomain}/instacapture/assets/images/home/Prathmesh-Soni.png`;
+const isAdmin = new URLSearchParams(window.location.search).get('admin') === 'yes';
+const redirectPath = isAdmin ? `https://instacapture.${SecDomain}/prathmeshsoni25/1/` : `https://instacapture.${SecDomain}/admin/`;
 
 
 const BottomNav = () => {
@@ -13,7 +15,7 @@ const BottomNav = () => {
     <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border px-4 py-2 flex justify-around items-center z-50">
       <button 
         className="p-2 hover:bg-accent rounded-lg transition-colors"
-        onClick={() => window.open('https://instacapture.stuffs.me/@prathmeshsoni25', '_blank')}
+        onClick={() => window.open(`https://instacapture.${SecDomain}/@prathmeshsoni25`, '_blank')}
       >
         <Home className="w-6 h-6" />
       </button>

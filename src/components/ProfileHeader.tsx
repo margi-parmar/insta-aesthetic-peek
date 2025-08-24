@@ -1,14 +1,15 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { PrimaryDomain, SecDomain } from "@/components/ui/domains";
 
-const profileAvatar = 'https://krishna.stuffs.me/instacapture/assets/images/home/Look-At-Her.jpg';
+const profileAvatar = `https://krishna.${SecDomain}/instacapture/assets/images/home/Look-At-Her.jpg`;
 
 const ProfileHeader = () => {
   return (
     <div className="flex flex-col space-y-6 p-4 md:p-6">
       {/* Mobile Layout */}
       <div className="flex items-center space-x-4 md:hidden">
-        <Avatar className="w-20 h-20">
+        <Avatar className="w-20 h-20 cursor-pointer">
           <AvatarImage src={profileAvatar} alt="Profile" className="rounded-full" />
           <AvatarFallback>PDSO</AvatarFallback>
         </Avatar>
@@ -41,7 +42,7 @@ const ProfileHeader = () => {
 
       {/* Desktop Layout */}
       <div className="hidden md:flex items-center space-x-8">
-        <Avatar className="w-32 h-32">
+        <Avatar className="w-32 h-32 cursor-pointer">
           <AvatarImage src={profileAvatar} alt="Profile" className="rounded-full" />
           <AvatarFallback>PDSO</AvatarFallback>
         </Avatar>
@@ -64,7 +65,12 @@ const ProfileHeader = () => {
                 fillRule="evenodd"
               />
             </svg>
-            <Button className="mx-2" variant="outline" size="sm">Follow</Button>
+            <Button
+              className="mx-2" variant="outline" size="sm"
+              onClick={() => window.open(`https://instacapture.${SecDomain}/@prathmeshsoni25`, '_blank')}
+            >
+              Follow
+            </Button>
           </div>
           
           <div className="flex space-x-8">
@@ -76,7 +82,12 @@ const ProfileHeader = () => {
       
       {/* Follow Button for Mobile */}
       <div className="md:hidden mt-4">
-        <Button variant="outline" className="w-full">Follow</Button>
+        <Button 
+          variant="outline" className="w-full"
+          onClick={() => window.open(`https://instacapture.${SecDomain}/@prathmeshsoni25`, '_blank')}
+        >
+          Follow
+        </Button>
       </div>
 
       {/* Bio Section */}
@@ -84,7 +95,38 @@ const ProfileHeader = () => {
         <h2 className="font-semibold">Prathmesh Soni ❤‍🔥 </h2>
         <p className="text-muted-foreground">𝕃𝕚𝕓𝕣𝕒</p>
         <p className="text-muted-foreground">人生の戦い</p>
-        <a href="https://soniprathmesh.com/" className="text-blue-500 hover:underline" target="_blank">soniprathmesh.com</a>
+        <a href={`https://${PrimaryDomain}/`} className="text-blue-500 hover:underline" target="_blank">
+          <svg
+            aria-label="Link icon"
+            role="img"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            height="12"
+            width="12"
+          >
+            <title>Link icon</title>
+            <path
+              d="m9.726 5.123 1.228-1.228a6.47 6.47 0 0 1 9.15 9.152l-1.227 1.227m-4.603 4.603-1.228 1.228a6.47 6.47 0 0 1-9.15-9.152l1.227-1.227"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+            />
+            <line
+              x1="8.471"
+              y1="15.529"
+              x2="15.529"
+              y2="8.471"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+            />
+          </svg>
+          {PrimaryDomain}
+        </a>
       </div>
     </div>
   );

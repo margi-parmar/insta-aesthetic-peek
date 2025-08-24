@@ -74,12 +74,16 @@ All colors MUST be HSL.
   }
 
   #lovable-badge {
-    display: none!important;
+    display: none !important;
   }
 
   .topss {
     top: -.01rem;
     right: -0.05rem;
+  }
+
+  .cursor-pointer {
+    cursor: pointer !important;
   }
 
   .dark {
