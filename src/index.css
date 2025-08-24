@@ -87,6 +87,7 @@ All colors MUST be HSL.
   }
 
   .dis-ruby-text {
+    padding-top: 2px !important;
     display: ruby-text !important;
   }
 
