@@ -23,9 +23,17 @@ const PostGrid = () => {
         setLoading(true);
         setError(null);
 
-        let urls = "https://cse-aiml.tech/api/posts/@prathmeshsoni";
-        const response = await fetch(urls);
-        
+        const params = new URLSearchParams(window.location.search);
+        const f_username = params.get("username").replace('null', '');
+        const f_url = params.get("url").replace('null', '');
+
+        const response = await fetch('/api/instacapture', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ username: f_username, url: f_url })
+        });        
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -33,16 +41,87 @@ const PostGrid = () => {
         const data = await response.json();
         setPosts(data.posts || []);
       } catch (err) {
+        /* 
+        ### How to Use This Feature
+
+        You can create your own clone profile page on **Instacapture** using a JSON response in the format shown below.
+
+        #### Steps:
+
+        1. **Choose your URL format**
+
+          * Use `@username` format:
+
+            ```
+            https://instacapture.stuffs.me/@<username>
+            ```
+
+            Example:
+
+            ```
+            https://instacapture.stuffs.me/@prathmeshsoni
+            ```
+
+          * Or, use any external source URL:
+
+            ```
+            https://instacapture.stuffs.me/?url=https://example.com
+            ```
+
+        2. **Ensure the response returns JSON** in the following format:
+
+          ```json
+          {
+            "posts": [
+              {
+                "is_video": false,
+                "url": "https://instacapture.stuffs.me/uploads/post/ee-sala-cup-namde.jpg?password=mypost-2509",
+                "is_type": "pinned",
+                "cover_photo": ""
+              },
+              {
+                "is_video": false,
+                "url": "https://instacapture.stuffs.me/uploads/post/lol.jpg?password=mypost-2509",
+                "is_type": "multi",
+                "cover_photo": ""
+              },
+              {
+                "is_video": true,
+                "url": "https://instacapture.stuffs.me/uploads/post/Udaipurs.mp4?password=mypost-2509",
+                "is_type": "reel",
+                "cover_photo": "https://instacapture.stuffs.me/uploads/post/Udaipur.jpg?password=mypost-2509"
+              }
+            ]
+          }
+          ```
+
+        3. **Explanation of fields:**
+
+          * `is_video`: `true` if the post is a video, otherwise `false`.
+          * `url`: Direct link to the image or video.
+          * `is_type`: Type of post (`pinned`, `multi`, `reel`, etc.).
+          * `cover_photo`: Thumbnail/cover image for videos (optional for images).
+
+        Once the JSON response is set correctly, your profile page will display your posts automatically. ✅
+
+        */
         console.error('Error fetching posts:', err);
         setError('Failed to load posts');
         // Fallback to dummy data on error
         const dummyPosts: Post[] = [
-          { is_video: false, url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop" },
-          { is_video: true, url: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4", cover_photo: "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=400&fit=crop" },
-          { is_video: false, url: "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=400&fit=crop" },
-          { is_video: true, url: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4", cover_photo: "https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=400&h=400&fit=crop" },
-          { is_video: false, url: "https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=400&h=400&fit=crop" },
-          { is_video: false, url: "https://images.unsplash.com/photo-1494790108755-2616c9f4d93e?w=400&h=400&fit=crop" },
+          {
+            "is_video": false, "is_type": "pinned", "cover_photo": "",
+            "url": "https://instacapture.stuffs.me/uploads/post/ee-sala-cup-namde.jpg?password=mypost-2509"
+          },
+          {
+            "is_video": false, "is_type": "multi", "cover_photo": "",
+            "url": "https://instacapture.stuffs.me/uploads/post/lol.jpg?password=mypost-2509"
+          },
+          {
+            "is_video": true, "is_type": "reel",
+            "url": "https://instacapture.stuffs.me/uploads/post/Udaipurs.mp4?password=mypost-2509",
+            "cover_photo": "https://instacapture.stuffs.me/uploads/post/Udaipur.jpg?password=mypost-2509"
+          }
         ];
         setPosts(dummyPosts);
       } finally {
