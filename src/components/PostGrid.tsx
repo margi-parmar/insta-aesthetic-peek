@@ -24,8 +24,8 @@ const PostGrid = () => {
         setError(null);
 
         const params = new URLSearchParams(window.location.search);
-        const f_username = params.get("username").replace('null', '');
-        const f_url = params.get("url").replace('null', '');
+        const f_username = params.get("username")?.replace('null', '');
+        const f_url = params.get("url")?.replace('null', '');
 
         const response = await fetch('/api/instacapture', {
           method: "POST",
