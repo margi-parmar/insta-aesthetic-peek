@@ -27,7 +27,7 @@ const PostGrid = () => {
         const f_username = params.get("username")?.replace('null', '');
         const f_url = params.get("url")?.replace('null', '');
 
-        const response = await fetch('/api/instacapture', {
+        const response = await fetch('https://instacapture-v2.vercel.app/api/profile_post', {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
