@@ -8,6 +8,7 @@ export default async function handler(req, res) {
     return;
   }
 
+  let main_url; // define outside try
   try {
     let username, url;
     if (req.method === 'GET') {
@@ -15,15 +16,19 @@ export default async function handler(req, res) {
     } else {
       ({ username, url } = req.body);
     }
-    if (!username) {
-      username = 'prathmeshsoni25';
-    }
 
+    // If both username and url are missing → throw error
     if (!username && !url) {
       return res.status(400).json({ error: 'Username is required' });
     }
 
-    let main_url = url ? url : `https://instacapture.stuffs.me/api/posts/@${username}`;
+    // Default username if only username missing
+    if (!username) {
+      username = 'prathmeshsoni25';
+    }
+
+    main_url = url ? url : `https://instacapture.stuffs.me/api/posts/@${username}`;
+
     const response = await fetch(main_url, {
       method: 'GET',
       headers: {
@@ -36,13 +41,13 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
-    
     res.status(200).json(data);
+
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Failed to fetch Instagram data',
-      details: `Url= '${main_url}', '${url}' : Error= ${error.message}`
+      details: `Url= '${main_url || 'N/A'}', '${error.message}'`
     });
   }
 }
