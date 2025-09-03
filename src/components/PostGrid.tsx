@@ -7,6 +7,7 @@ interface Post {
   is_video: boolean;
   url: string;
   cover_photo?: string;
+  is_type?: "reel" | "multi" | "pinned" | "none";
 }
 
 const PostGrid = () => {
@@ -110,17 +111,22 @@ const PostGrid = () => {
         // Fallback to dummy data on error
         const dummyPosts: Post[] = [
           {
-            "is_video": false, "is_type": "pinned", "cover_photo": "",
-            "url": "https://instacapture.stuffs.me/uploads/post/ee-sala-cup-namde.jpg?password=mypost-2509"
+            is_video: false, 
+            is_type: "pinned", 
+            cover_photo: "",
+            url: "https://instacapture.stuffs.me/uploads/post/ee-sala-cup-namde.jpg?password=mypost-2509"
           },
           {
-            "is_video": false, "is_type": "multi", "cover_photo": "",
-            "url": "https://instacapture.stuffs.me/uploads/post/lol.jpg?password=mypost-2509"
+            is_video: false, 
+            is_type: "multi", 
+            cover_photo: "",
+            url: "https://instacapture.stuffs.me/uploads/post/lol.jpg?password=mypost-2509"
           },
           {
-            "is_video": true, "is_type": "reel",
-            "url": "https://instacapture.stuffs.me/uploads/post/Udaipurs.mp4?password=mypost-2509",
-            "cover_photo": "https://instacapture.stuffs.me/uploads/post/Udaipur.jpg?password=mypost-2509"
+            is_video: true, 
+            is_type: "reel",
+            url: "https://instacapture.stuffs.me/uploads/post/Udaipurs.mp4?password=mypost-2509",
+            cover_photo: "https://instacapture.stuffs.me/uploads/post/Udaipur.jpg?password=mypost-2509"
           }
         ];
         setPosts(dummyPosts);
