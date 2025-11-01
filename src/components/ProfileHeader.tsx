@@ -27,8 +27,8 @@ const ProfileHeader = () => {
         const username = urlParams.get('username') || urlParams.get('url');
         
         const apiUrl = username 
-          ? `http://cse-aiml.tech/api/profile_data/?username=${username}`
-          : 'http://cse-aiml.tech/api/profile_data/';
+          ? `https://cse-aiml.tech/api/profile_data/?username=${username}`
+          : 'https://cse-aiml.tech/api/profile_data/';
         
         const response = await fetch(apiUrl);
         
