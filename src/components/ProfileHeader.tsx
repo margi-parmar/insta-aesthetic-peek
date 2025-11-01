@@ -1,22 +1,100 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { PrimaryDomain, SecDomain } from "@/components/ui/domains";
+import { useEffect, useState } from "react";
 
-const profileAvatar = `https://krishna.${SecDomain}/instacapture/assets/images/home/Look-At-Her.jpg`;
+interface ProfileData {
+  username: string;
+  followers: string;
+  following: string;
+  name: string;
+  description: string;
+  externalLink: string;
+  externalLinkText: string;
+  profileIcon: string;
+}
 
 const ProfileHeader = () => {
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        setLoading(true);
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username') || urlParams.get('url');
+        
+        const apiUrl = username 
+          ? `http://cse-aiml.tech/api/profile_data/?username=${username}`
+          : 'http://cse-aiml.tech/api/profile_data/';
+        
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch profile data');
+        }
+        
+        const data = await response.json();
+        setProfileData(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching profile data:', err);
+        setError('Failed to load profile data');
+        // Fallback to default data
+        setProfileData({
+          username: 'PrathmeshSoni25',
+          followers: '505',
+          following: '1051',
+          name: 'Prathmesh Soni ❤‍🔥',
+          description: '𝕃𝕚𝕓𝕣𝕒\n人生の戦い',
+          externalLink: `https://${PrimaryDomain}/`,
+          externalLinkText: PrimaryDomain,
+          profileIcon: `https://krishna.${SecDomain}/instacapture/assets/images/home/Look-At-Her.jpg`,
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col space-y-6 p-4 md:p-6 animate-pulse">
+        <div className="flex items-center space-x-4">
+          <div className="w-20 h-20 md:w-32 md:h-32 bg-muted rounded-full" />
+          <div className="flex-1 space-y-2">
+            <div className="h-6 bg-muted rounded w-48" />
+            <div className="h-4 bg-muted rounded w-32" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!profileData) {
+    return (
+      <div className="flex flex-col space-y-6 p-4 md:p-6">
+        <p className="text-muted-foreground">No profile data available</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col space-y-6 p-4 md:p-6">
       {/* Mobile Layout */}
       <div className="flex items-center space-x-4 md:hidden">
         <Avatar className="w-20 h-20 cursor-pointer">
-          <AvatarImage src={profileAvatar} alt="Profile" className="rounded-full" />
-          <AvatarFallback>PDSO</AvatarFallback>
+          <AvatarImage src={profileData.profileIcon} alt="Profile" className="rounded-full" />
+          <AvatarFallback>{profileData.username.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
         
         <div className="flex-1">
           <div className="flex items-center space-x-2 mb-2">
-            <h1 className="text-xl font-semibold">PrathmeshSoni25</h1>
+            <h1 className="text-xl font-semibold">{profileData.username}</h1>
             <svg
               aria-label="Verified"
               className="x1lliihq x1n2onr6"
@@ -34,8 +112,8 @@ const ProfileHeader = () => {
             </svg>
           </div>
           <div className="flex space-x-4 text-sm">
-            <span><strong>505</strong> followers</span>
-            <span><strong>1051</strong> following</span>
+            <span><strong>{profileData.followers}</strong> followers</span>
+            <span><strong>{profileData.following}</strong> following</span>
           </div>
         </div>
       </div>
@@ -43,13 +121,13 @@ const ProfileHeader = () => {
       {/* Desktop Layout */}
       <div className="hidden md:flex items-center space-x-8">
         <Avatar className="w-32 h-32 cursor-pointer">
-          <AvatarImage src={profileAvatar} alt="Profile" className="rounded-full" />
-          <AvatarFallback>PDSO</AvatarFallback>
+          <AvatarImage src={profileData.profileIcon} alt="Profile" className="rounded-full" />
+          <AvatarFallback>{profileData.username.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
         
         <div className="flex-1 space-y-4">
           <div className="flex items-center">
-            <h1 className="text-2xl font-light">PrathmeshSoni25</h1>
+            <h1 className="text-2xl font-light">{profileData.username}</h1>
             <svg
               aria-label="Verified"
               className="x1lliihq x1n2onr6 mx-1"
@@ -74,8 +152,8 @@ const ProfileHeader = () => {
           </div>
           
           <div className="flex space-x-8">
-            <span><strong>505</strong> followers</span>
-            <span><strong>1051</strong> following</span>
+            <span><strong>{profileData.followers}</strong> followers</span>
+            <span><strong>{profileData.following}</strong> following</span>
           </div>
         </div>
       </div>
@@ -92,42 +170,45 @@ const ProfileHeader = () => {
 
       {/* Bio Section */}
       <div>
-        <h2 className="font-semibold">Prathmesh Soni ❤‍🔥 </h2>
-        <p className="text-muted-foreground">𝕃𝕚𝕓𝕣𝕒</p>
-        <p className="text-muted-foreground">人生の戦い</p>
-        <a href={`https://${PrimaryDomain}/`} className="text-blue-500 hover:underline dis-ruby-text" target="_blank">
-          <svg
-            aria-label="Link icon"
-            role="img"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            height="12"
-            width="12"
-            className="mr-5px"
-          >
-            <title>Link icon</title>
-            <path
-              d="m9.726 5.123 1.228-1.228a6.47 6.47 0 0 1 9.15 9.152l-1.227 1.227m-4.603 4.603-1.228 1.228a6.47 6.47 0 0 1-9.15-9.152l1.227-1.227"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-            />
-            <line
-              x1="8.471"
-              y1="15.529"
-              x2="15.529"
-              y2="8.471"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-            />
-          </svg>
-          {PrimaryDomain}
-        </a>
+        <h2 className="font-semibold">{profileData.name}</h2>
+        {profileData.description.split('\n').map((line, index) => (
+          <p key={index} className="text-muted-foreground">{line}</p>
+        ))}
+        {profileData.externalLink && (
+          <a href={profileData.externalLink} className="text-blue-500 hover:underline dis-ruby-text" target="_blank" rel="noopener noreferrer">
+            <svg
+              aria-label="Link icon"
+              role="img"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              height="12"
+              width="12"
+              className="mr-5px"
+            >
+              <title>Link icon</title>
+              <path
+                d="m9.726 5.123 1.228-1.228a6.47 6.47 0 0 1 9.15 9.152l-1.227 1.227m-4.603 4.603-1.228 1.228a6.47 6.47 0 0 1-9.15-9.152l1.227-1.227"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              />
+              <line
+                x1="8.471"
+                y1="15.529"
+                x2="15.529"
+                y2="8.471"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              />
+            </svg>
+            {profileData.externalLinkText}
+          </a>
+        )}
       </div>
     </div>
   );
