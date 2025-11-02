@@ -21,6 +21,16 @@ const ProfileHeader = () => {
 
   useEffect(() => {
     const fetchProfileData = async () => {
+      let DefaultData = {
+        username: 'PrathmeshSoni25',
+        followers: '505',
+        following: '1051',
+        name: 'Prathmesh Soni ❤‍🔥',
+        description: '𝕃𝕚𝕓𝕣𝕒\n人生の戦い',
+        externalLink: `https://${PrimaryDomain}/`,
+        externalLinkText: PrimaryDomain,
+        profileIcon: `https://krishna.${SecDomain}/instacapture/assets/images/home/Look-At-Her.jpg`,
+      }
       try {
         setLoading(true);
         const params = new URLSearchParams(window.location.search);
@@ -39,7 +49,16 @@ const ProfileHeader = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const data = await response.json();
+        let data = await response.json();
+        const expectedFields = [
+          'username', 'followers', 'following', 'name',
+          'description', 'externalLink', 'externalLinkText', 'profileIcon'
+        ];
+        for (const field of expectedFields) {
+          if (!(field in data)) {
+            data[field] = DefaultData[field];
+          }
+        }
         setProfileData(data);
         setError(null);
       } catch (err) {
@@ -126,16 +145,7 @@ const ProfileHeader = () => {
         console.error('Error fetching profile data:', err);
         setError('Failed to load profile data');
         // Fallback to default data
-        setProfileData({
-          username: 'PrathmeshSoni25',
-          followers: '505',
-          following: '1051',
-          name: 'Prathmesh Soni ❤‍🔥',
-          description: '𝕃𝕚𝕓𝕣𝕒\n人生の戦い',
-          externalLink: `https://${PrimaryDomain}/`,
-          externalLinkText: PrimaryDomain,
-          profileIcon: `https://krishna.${SecDomain}/instacapture/assets/images/home/Look-At-Her.jpg`,
-        });
+        setProfileData(DefaultData);
       } finally {
         setLoading(false);
       }
