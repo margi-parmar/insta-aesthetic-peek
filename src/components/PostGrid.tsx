@@ -73,6 +73,13 @@ const PostGrid = () => {
 
           ```json
           {
+            "username": "PrathmeshSoni25",
+            "followers": "505",
+            "following": "1051",
+            "name": "Prathmesh Soni ❤‍🔥",
+            "description": "𝕃𝕚𝕓𝕣𝕒\n人生の戦い",
+            "externalLink": "https://yourdomain.com/",
+            "externalLinkText": "yourdomain.com",
             "posts": [
               {
                 "is_video": false,
@@ -97,11 +104,21 @@ const PostGrid = () => {
           ```
 
         3. **Explanation of fields:**
+          * `username`: Your profile username.
+          * `followers`: Number of followers.
+          * `following`: Number of accounts you follow.
+          * `name`: Your full name.
+          * `description`: Your bio/description (use `\n` for line breaks).
+          * `externalLink`: A link to your website or other social media.
+          * `externalLinkText`: Text to display for the external link.
+          * `profileIcon`: URL to your profile picture.
+          * `posts`: An array of your posts with the following details for each post:
+            * `is_video`: `true` if the post is a video, otherwise `false`.
+            * `url`: Direct link to the image or video.
+            * `is_type`: Type of post (`pinned`, `multi`, `reel`, etc.).
+            * `cover_photo`: Thumbnail/cover image for videos (optional for images).
 
-          * `is_video`: `true` if the post is a video, otherwise `false`.
-          * `url`: Direct link to the image or video.
-          * `is_type`: Type of post (`pinned`, `multi`, `reel`, etc.).
-          * `cover_photo`: Thumbnail/cover image for videos (optional for images).
+ Thumbnail/cover image for videos (optional for images).
 
         Once the JSON response is set correctly, your profile page will display your posts automatically. ✅
 
