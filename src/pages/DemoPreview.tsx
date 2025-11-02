@@ -102,7 +102,7 @@ const DemoPreview = () => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/submit-profile', {
+      const response = await fetch('https://instacapture-v2.vercel.app/api/profile_submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
