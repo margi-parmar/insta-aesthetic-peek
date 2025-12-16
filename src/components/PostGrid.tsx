@@ -33,7 +33,7 @@ const PostGrid = () => {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ username: f_username, url: f_url })
+          body: JSON.stringify({ username: f_username, url: f_url, is_post: true })
         });        
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
