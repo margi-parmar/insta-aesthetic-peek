@@ -15,7 +15,6 @@ interface PostGridProps {
 
 const PostGrid = ({ posts }: PostGridProps) => {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -60,17 +59,7 @@ const PostGrid = ({ posts }: PostGridProps) => {
     </DialogContent>
   );
 
-  if (loading) {
-    return (
-      <div className="grid grid-cols-3 gap-1 md:gap-2 p-1">
-        {Array.from({ length: 9 }).map((_, index) => (
-          <div key={index} className="aspect-square bg-muted animate-pulse rounded-sm" />
-        ))}
-      </div>
-    );
-  }
-
-  if (error) {
+  if (!posts || posts.length === 0) {
     return (
       <div className="p-4 text-center text-muted-foreground">
         <p>{error}</p>
