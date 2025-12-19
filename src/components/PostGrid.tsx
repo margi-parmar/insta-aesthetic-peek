@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Play, Image, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 interface Post {
   is_video: boolean;
@@ -10,150 +9,15 @@ interface Post {
   is_type?: "reel" | "multi" | "pinned" | "none";
 }
 
-const PostGrid = () => {
+interface PostGridProps {
+  posts: any[];
+}
+
+const PostGrid = ({ posts }: PostGridProps) => {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Fetch posts from API
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const params = new URLSearchParams(window.location.search);
-        const f_username = params.get("username")?.replace('null', '');
-        const f_url = params.get("url")?.replace('null', '');
-
-        const response = await fetch('https://instacapture-v2.vercel.app/api/profile_post', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ username: f_username, url: f_url, is_post: true })
-        });        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        setPosts(data.posts || []);
-      } catch (err) {
-        /* 
-        ### How to Use This Feature
-
-        You can create your own clone profile page on **Instacapture** using a JSON response in the format shown below.
-
-        #### Steps:
-
-        1. **Choose your URL format**
-
-          * Use `@username` format:
-
-            ```
-            https://instacapture.stuffs.me/@<username>
-            ```
-
-            Example:
-
-            ```
-            https://instacapture.stuffs.me/@prathmeshsoni
-            ```
-
-          * Or, use any external source URL:
-
-            ```
-            https://instacapture.stuffs.me/?url=https://example.com
-            ```
-
-        2. **Ensure the response returns JSON** in the following format:
-
-          ```json
-          {
-            "username": "PrathmeshSoni25",
-            "followers": "505",
-            "following": "1051",
-            "name": "Prathmesh Soni ❤‍🔥",
-            "description": "𝕃𝕚𝕓𝕣𝕒\n人生の戦い",
-            "externalLink": "https://yourdomain.com/",
-            "externalLinkText": "yourdomain.com",
-            "posts": [
-              {
-                "is_video": false,
-                "url": "https://instacapture.stuffs.me/uploads/post/ee-sala-cup-namde.jpg?password=mypost-2509",
-                "is_type": "pinned",
-                "cover_photo": ""
-              },
-              {
-                "is_video": false,
-                "url": "https://instacapture.stuffs.me/uploads/post/lol.jpg?password=mypost-2509",
-                "is_type": "multi",
-                "cover_photo": ""
-              },
-              {
-                "is_video": true,
-                "url": "https://instacapture.stuffs.me/uploads/post/Udaipurs.mp4?password=mypost-2509",
-                "is_type": "reel",
-                "cover_photo": "https://instacapture.stuffs.me/uploads/post/Udaipur.jpg?password=mypost-2509"
-              }
-            ]
-          }
-          ```
-
-        3. **Explanation of fields:**
-          * `username`: Your profile username.
-          * `followers`: Number of followers.
-          * `following`: Number of accounts you follow.
-          * `name`: Your full name.
-          * `description`: Your bio/description (use `\n` for line breaks).
-          * `externalLink`: A link to your website or other social media.
-          * `externalLinkText`: Text to display for the external link.
-          * `profileIcon`: URL to your profile picture.
-          * `posts`: An array of your posts with the following details for each post:
-            * `is_video`: `true` if the post is a video, otherwise `false`.
-            * `url`: Direct link to the image or video.
-            * `is_type`: Type of post (`pinned`, `multi`, `reel`, etc.).
-            * `cover_photo`: Thumbnail/cover image for videos (optional for images).
-
- Thumbnail/cover image for videos (optional for images).
-
-        Once the JSON response is set correctly, your profile page will display your posts automatically. ✅
-
-        */
-        console.error('Error fetching posts:', err);
-        setError('Failed to load posts');
-        // Fallback to dummy data on error
-        const dummyPosts: Post[] = [
-          {
-            is_video: false, 
-            is_type: "pinned", 
-            cover_photo: "",
-            url: "https://instacapture.stuffs.me/uploads/post/ee-sala-cup-namde.jpg?password=mypost-2509"
-          },
-          {
-            is_video: false, 
-            is_type: "multi", 
-            cover_photo: "",
-            url: "https://instacapture.stuffs.me/uploads/post/lol.jpg?password=mypost-2509"
-          },
-          {
-            is_video: true, 
-            is_type: "reel",
-            url: "https://instacapture.stuffs.me/uploads/post/Udaipurs.mp4?password=mypost-2509",
-            cover_photo: "https://instacapture.stuffs.me/uploads/post/Udaipur.jpg?password=mypost-2509"
-          }
-        ];
-        setPosts(dummyPosts);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
 
   useEffect(() => {
     if (selectedPost?.is_video && videoRef.current) {

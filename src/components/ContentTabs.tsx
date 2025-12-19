@@ -1,7 +1,11 @@
 import { Grid3X3, Bookmark } from "lucide-react";
 import PostGrid from "./PostGrid";
 
-const ContentTabs = () => {
+interface ContentTabsProps {
+  data: any;
+}
+
+const ContentTabs = ({ data }: ContentTabsProps) => {
   return (
     <div className="w-full">
       <div className="flex items-center justify-center py-4 border-t border-border">
@@ -13,7 +17,7 @@ const ContentTabs = () => {
       </div>
 
       <div className="mt-0">
-        <PostGrid />
+        <PostGrid posts={data.posts} />
       </div>
     </div>
   );
