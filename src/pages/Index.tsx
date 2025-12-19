@@ -7,7 +7,6 @@ import { PrimaryDomain, SecDomain } from "@/components/ui/domains";
 const Index = () => {
   const [profileData, setProfileData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -43,7 +42,6 @@ const Index = () => {
       }
       try {
         setLoading(true);
-        setError(null);
 
         const params = new URLSearchParams(window.location.search);
         const f_username = params.get("username")?.replace('null', '');
@@ -151,7 +149,6 @@ const Index = () => {
 
         */
         console.error('Error fetching profile data:', err);
-        setError('Failed to load profile data');
         setProfileData(DefaultData);
       } finally {
         setLoading(false);
@@ -161,7 +158,25 @@ const Index = () => {
     fetchProfile();
   }, []);
 
-  if (loading) return <div className="p-4">Loading...</div>;
+  useEffect(() => {
+    if (profileData && profileData.name) {
+      document.title = `${profileData.name} (@${profileData.username}) • Instacapture`;
+    }
+  }, [profileData]);
+
+  if (loading) {
+    const profileData1 = {isLoading: true};
+    const profileData2 = [{isLoading: true}];
+    return (
+      <div className="min-h-screen bg-background pb-16">
+        <div className="max-w-4xl mx-auto">
+          <ProfileHeader profileData={profileData1} />
+          <ContentTabs data={profileData2} />
+        </div>
+        <BottomNav />
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-background pb-16">

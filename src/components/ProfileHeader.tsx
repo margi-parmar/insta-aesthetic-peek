@@ -2,11 +2,26 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { SecDomain } from "@/components/ui/domains";
 
+
 interface ProfileHeaderProps {
   profileData: any;
 }
 
 const ProfileHeader = ({ profileData }: ProfileHeaderProps) => {
+  if (profileData.isLoading) {
+    return (
+      <div className="flex flex-col space-y-6 p-4 md:p-6 animate-pulse">
+        <div className="flex items-center space-x-4">
+          <div className="w-20 h-20 md:w-32 md:h-32 bg-muted rounded-full" />
+          <div className="flex-1 space-y-2">
+            <div className="h-6 bg-muted rounded w-48" />
+            <div className="h-4 bg-muted rounded w-32" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (!profileData) {
     return (
       <div className="flex flex-col space-y-6 p-4 md:p-6">

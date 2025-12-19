@@ -15,7 +15,6 @@ interface PostGridProps {
 
 const PostGrid = ({ posts }: PostGridProps) => {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -59,11 +58,21 @@ const PostGrid = ({ posts }: PostGridProps) => {
     </DialogContent>
   );
 
+  if (posts[0]?.isLoading) {
+    return (
+      <div className="grid grid-cols-3 gap-1 md:gap-2 p-1">
+        {Array.from({ length: 9 }).map((_, index) => (
+          <div key={index} className="aspect-square bg-muted animate-pulse rounded-sm" />
+        ))}
+      </div>
+    );
+  }
+
   if (!posts || posts.length === 0) {
     return (
       <div className="p-4 text-center text-muted-foreground">
-        <p>{error}</p>
-        <p className="text-sm mt-2">Showing fallback content</p>
+        <p>No posts available</p>
+        <p className="text-sm mt-2">Sorry, there are no posts to display at the moment.</p>
       </div>
     );
   }
