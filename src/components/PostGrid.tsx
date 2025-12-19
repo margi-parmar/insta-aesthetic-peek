@@ -58,7 +58,8 @@ const PostGrid = ({ posts }: PostGridProps) => {
     </DialogContent>
   );
 
-  if (posts[0]?.isLoading) {
+  const isLoading = posts ? posts[0]?.isLoading : false;
+  if (isLoading) {
     return (
       <div className="grid grid-cols-3 gap-1 md:gap-2 p-1">
         {Array.from({ length: 9 }).map((_, index) => (
