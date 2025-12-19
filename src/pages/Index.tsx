@@ -166,7 +166,7 @@ const Index = () => {
 
   if (loading) {
     const profileData1 = {isLoading: true};
-    const profileData2 = [{isLoading: true}];
+    const profileData2 = {posts: [{isLoading: true}]};
     return (
       <div className="min-h-screen bg-background pb-16">
         <div className="max-w-4xl mx-auto">
