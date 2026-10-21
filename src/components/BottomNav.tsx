@@ -8,16 +8,16 @@ import { SecDomain } from "@/components/ui/domains";
 const isAdmin = new URLSearchParams(window.location.search).get('admin') === 'yes';
 const redirectPath = isAdmin ? `https://instacapture.${SecDomain}/prathmeshsoniii/1/` : `https://instacapture.${SecDomain}/admin/`;
 
+interface ContentTabsProps {
+  data: any;
+}
 
-const BottomNav = ({
-  profileAvatar=`https://krishna.${SecDomain}/instacapture/assets/images/home/Prathmesh-Soni.png`, 
-  pusername=`prathmeshsoniii`,
-}) => {
+const BottomNav = = ({ data }: ContentTabsProps) => {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border px-4 py-2 flex justify-around items-center z-50">
       <button 
         className="p-2 hover:bg-accent rounded-lg transition-colors"
-        onClick={() => window.open(`https://instacapture.${SecDomain}/@${pusername}`, '_blank')}
+        onClick={() => window.open(`https://instacapture.${SecDomain}/!${data.username}`, '_blank')}
       >
         <Home className="w-6 h-6" />
       </button>
@@ -114,7 +114,7 @@ const BottomNav = ({
       >
         <div className="w-7 h-7 rounded-full bg-gradient-to-r flex items-center justify-center">
         <Avatar className="w-7 h-7">
-          <AvatarImage src={profileAvatar} alt="Profile" className="rounded-full" />
+          <AvatarImage src={data.profileIcon} alt="Profile" className="rounded-full" />
           <AvatarFallback>PDSO</AvatarFallback>
         </Avatar>
         </div>

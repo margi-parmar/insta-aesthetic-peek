@@ -173,7 +173,7 @@ const Index = () => {
           <ProfileHeader profileData={profileData1} />
           <ContentTabs data={profileData2} />
         </div>
-        <BottomNav profileAvatar={profileData?.profileIcon}/>
+        <BottomNav data={profileData}/>
       </div>
     )
   }
@@ -184,7 +184,7 @@ const Index = () => {
         <ProfileHeader profileData={profileData} />
         <ContentTabs data={profileData} />
       </div>
-      <BottomNav />
+      <BottomNav data={profileData}/>
     </div>
   );
 };
