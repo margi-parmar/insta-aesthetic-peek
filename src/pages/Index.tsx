@@ -24,19 +24,19 @@ const Index = () => {
             is_video: false, 
             is_type: "pinned", 
             cover_photo: "",
-            url: "https://instacapture.stuffs.me/uploads/post/ee-sala-cup-namde.jpg?password=mypost-2509"
+            url: "https://instacapture.mrsoni.in/uploads/post/ee-sala-cup-namde.jpg?password=mypost-2509"
           },
           {
             is_video: false, 
             is_type: "multi", 
             cover_photo: "",
-            url: "https://instacapture.stuffs.me/uploads/post/lol.jpg?password=mypost-2509"
+            url: "https://instacapture.mrsoni.in/uploads/post/lol.jpg?password=mypost-2509"
           },
           {
             is_video: true, 
             is_type: "reel",
-            url: "https://instacapture.stuffs.me/uploads/post/Udaipurs.mp4?password=mypost-2509",
-            cover_photo: "https://instacapture.stuffs.me/uploads/post/Udaipur.jpg?password=mypost-2509"
+            url: "https://instacapture.mrsoni.in/uploads/post/Udaipurs.mp4?password=mypost-2509",
+            cover_photo: "https://instacapture.mrsoni.in/uploads/post/Udaipur.jpg?password=mypost-2509"
           }
         ]
       }
@@ -80,19 +80,19 @@ const Index = () => {
           * Use `@username` format:
 
             ```
-            https://instacapture.stuffs.me/@<username>
+            https://instacapture.mrsoni.in/@<username>
             ```
 
             Example:
 
             ```
-            https://instacapture.stuffs.me/@prathmeshsoni
+            https://instacapture.mrsoni.in/@prathmeshsoni
             ```
 
           * Or, use any external source URL:
 
             ```
-            https://instacapture.stuffs.me/?url=https://example.com
+            https://instacapture.mrsoni.in/?url=https://example.com
             ```
 
         2. **Ensure the response returns JSON** in the following format:
@@ -110,21 +110,21 @@ const Index = () => {
             "posts": [
               {
                 "is_video": false,
-                "url": "https://instacapture.stuffs.me/uploads/post/ee-sala-cup-namde.jpg?password=mypost-2509",
+                "url": "https://instacapture.mrsoni.in/uploads/post/ee-sala-cup-namde.jpg?password=mypost-2509",
                 "is_type": "pinned",
                 "cover_photo": ""
               },
               {
                 "is_video": false,
-                "url": "https://instacapture.stuffs.me/uploads/post/lol.jpg?password=mypost-2509",
+                "url": "https://instacapture.mrsoni.in/uploads/post/lol.jpg?password=mypost-2509",
                 "is_type": "multi",
                 "cover_photo": ""
               },
               {
                 "is_video": true,
-                "url": "https://instacapture.stuffs.me/uploads/post/Udaipurs.mp4?password=mypost-2509",
+                "url": "https://instacapture.mrsoni.in/uploads/post/Udaipurs.mp4?password=mypost-2509",
                 "is_type": "reel",
-                "cover_photo": "https://instacapture.stuffs.me/uploads/post/Udaipur.jpg?password=mypost-2509"
+                "cover_photo": "https://instacapture.mrsoni.in/uploads/post/Udaipur.jpg?password=mypost-2509"
               }
             ]
           }

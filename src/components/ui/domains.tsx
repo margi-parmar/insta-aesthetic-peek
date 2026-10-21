@@ -1,4 +1,4 @@
 const PrimaryDomain = 'soniprathmesh.com';
-const SecDomain = 'stuffs.me';
+const SecDomain = 'mrsoni.in';
 
 export { PrimaryDomain, SecDomain };
