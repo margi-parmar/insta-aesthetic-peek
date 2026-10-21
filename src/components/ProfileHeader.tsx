@@ -92,7 +92,7 @@ const ProfileHeader = ({ profileData }: ProfileHeaderProps) => {
             </svg>
             <Button
               className="mx-2" variant="outline" size="sm"
-              onClick={() => window.open(`https://instacapture.${SecDomain}/@prathmeshsoni25`, '_blank')}
+              onClick={() => window.open(`https://instacapture.${SecDomain}/!${profileData.username}`, '_blank')}
             >
               Follow
             </Button>
@@ -109,7 +109,7 @@ const ProfileHeader = ({ profileData }: ProfileHeaderProps) => {
       <div className="md:hidden mt-4">
         <Button 
           variant="outline" className="w-full"
-          onClick={() => window.open(`https://instacapture.${SecDomain}/@prathmeshsoni25`, '_blank')}
+          onClick={() => window.open(`https://instacapture.${SecDomain}/!${profileData.username}`, '_blank')}
         >
           Follow
         </Button>

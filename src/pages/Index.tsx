@@ -11,7 +11,7 @@ const Index = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       let DefaultData = {
-        username: 'PrathmeshSoni25',
+        username: 'prathmeshsoniii',
         followers: '505',
         following: '1051',
         name: 'Prathmesh Soni ❤‍🔥',
@@ -99,7 +99,7 @@ const Index = () => {
 
           ```json
           {
-            "username": "PrathmeshSoni25",
+            "username": "prathmeshsoniii",
             "followers": "505",
             "following": "1051",
             "name": "Prathmesh Soni ❤‍🔥",
@@ -173,7 +173,7 @@ const Index = () => {
           <ProfileHeader profileData={profileData1} />
           <ContentTabs data={profileData2} />
         </div>
-        <BottomNav />
+        <BottomNav profileAvatar={profileData.profileIcon}/>
       </div>
     )
   }
