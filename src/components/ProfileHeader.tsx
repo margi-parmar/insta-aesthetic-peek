@@ -8,7 +8,7 @@ interface ProfileHeaderProps {
 }
 
 const ProfileHeader = ({ profileData }: ProfileHeaderProps) => {
-  if (profileData.isLoading) {
+  if (profileData?.isLoading) {
     return (
       <div className="flex flex-col space-y-6 p-4 md:p-6 animate-pulse">
         <div className="flex items-center space-x-4">
