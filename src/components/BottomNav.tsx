@@ -5,7 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SecDomain } from "@/components/ui/domains";
 
 
-const ;
 const isAdmin = new URLSearchParams(window.location.search).get('admin') === 'yes';
 const redirectPath = isAdmin ? `https://instacapture.${SecDomain}/prathmeshsoniii/1/` : `https://instacapture.${SecDomain}/admin/`;
 
