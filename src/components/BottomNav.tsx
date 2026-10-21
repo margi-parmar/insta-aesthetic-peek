@@ -114,7 +114,7 @@ const BottomNav = ({ data }: ContentTabsProps) => {
       >
         <div className="w-7 h-7 rounded-full bg-gradient-to-r flex items-center justify-center">
         <Avatar className="w-7 h-7">
-          <AvatarImage src={data.profileIcon} alt="Profile" className="rounded-full" />
+          <AvatarImage src={data?.profileIcon} alt="Profile" className="rounded-full" />
           <AvatarFallback>PDSO</AvatarFallback>
         </Avatar>
         </div>
