@@ -173,7 +173,7 @@ const Index = () => {
           <ProfileHeader profileData={profileData1} />
           <ContentTabs data={profileData2} />
         </div>
-        <BottomNav profileAvatar={profileData.profileIcon}/>
+        <BottomNav profileAvatar={profileData?.profileIcon}/>
       </div>
     )
   }
